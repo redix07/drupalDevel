@@ -125,7 +125,7 @@ cd $vp$vh
 
 echo 'Downloading Drupal and most useful modules...'
 #Download Drupal with modules which have defined in .make files
-drush -y  make https://raw.github.com/fadehelix/DrupalDevelopmentScripts/master/drush/default.make .
+drush -y  make https://raw.githubusercontent.com/redix07/drupalDevel/master/profile.make .
 
 #files
 mkdir sites/default/files

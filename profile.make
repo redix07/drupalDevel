@@ -39,3 +39,4 @@ projects:
     subdir: "contrib"
 
   adminimal_theme:
+    subdir: ""
