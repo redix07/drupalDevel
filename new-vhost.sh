@@ -108,6 +108,7 @@ if ([[ $REPLY =~ ^[Yy]$ ]]) then
 	FLUSH PRIVILEGES;"
 
 	echo -e "$(tput setaf 2)New database $sitename has been created!$(tput sgr 0)"
+	echo -e "$(tput setaf 2)user name: $sitename and password: admin$(tput sgr 0)"
 fi
 
 #--------------------------------
@@ -136,10 +137,15 @@ cp sites/default/default.settings.php sites/default/settings.php
 chmod g+w sites/default/settings.php
 
 #install drupal
-drush si standard --account-name=admin account-pass='admin' --db-url=mysql://"$sitename":"admin"@localhost/"$sitename" -y
-
-echo -e "\n\n $(tput setaf 6)Success!$(tput sgr 0) \n " 
+drush si standard --account-name=admin --account-pass='admin' --db-url=mysql://"$sitename":"admin"@localhost/"$sitename" -y
 
 
+#Some site customization after installation
+drush en admin admin_menu adminimal_admin_menu features field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui -y
+drush dis toolbar -y
 
 
+#change owner
+chown -R $vhowner:www-data $vp$vh
+
+echo -e "\n\n $(tput setaf 6)Success!$(tput sgr 0) \n "
