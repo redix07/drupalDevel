@@ -159,7 +159,7 @@ chmod g+w sites/default/settings.php
 drush si standard --account-name=admin --account-pass='admin' --db-url=mysql://"$sitename":"admin"@localhost/"$sitename" -y
 
 #Some site customization after installation
-drush en admin admin_menu adminimal_admin_menu features field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui base_page_setup bps_ct_base bps_views_article bps_pathauto -y
+drush en admin admin_menu adminimal_admin_menu features field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto -y
 drush dis toolbar -y
 
 #Setup theme

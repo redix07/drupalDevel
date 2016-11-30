@@ -11,6 +11,8 @@ projects:
     subdir: "admin-module"
   ctools:
     subdir: "contrib"
+  colorbox:
+    subdir: "contrib"
   easy_breadcrumb:
     subdir: "contrib"
   features:
