@@ -131,13 +131,16 @@ rm -R sites/all/modules/.git
 #get base theme
 git clone https://github.com/redix07/drupalTheme.git sites/all/themes/
 rm -R sites/all/themes/.git
+
 mv sites/all/themes/base-theme sites/all/themes/$sitename
 mv sites/all/themes/$sitename/base-theme-name.info sites/all/themes/$sitename/$sitename.info
+
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/$sitename.info
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/template.php
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/theme-settings.php
 
-
+sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/templates/page.tpl.php
+sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/templates/node/node--news.tpl.php
 
 #get drupal core and module
 echo 'Downloading Drupal and most useful modules...'
@@ -173,6 +176,15 @@ wget  https://github.com/moxiecode/plupload/archive/v1.5.8.zip
 unzip v1.5.8.zip
 rm -R v1.5.8.zip
 mv plupload-1.5.8 plupload
+
+# plupload
+cd sites/all/libraries
+wget  https://github.com/jackmoore/colorbox/archive/1.x.zip
+unzip colorbox-1.x.zip
+rm -R colorbox-1.x.zip
+mv colorbox-1.x colorbox
+
+
 
 #change owner
 chown -R $vhowner:www-data $vp$vh
