@@ -133,9 +133,9 @@ git clone https://github.com/redix07/drupalTheme.git sites/all/themes/
 rm -R sites/all/themes/.git
 mv sites/all/themes/base-theme sites/all/themes/$sitename
 mv sites/all/themes/$sitename/base-theme-name.info sites/all/themes/$sitename/$sitename.info
-sed -i 's/base-theme-name/$sitename/g' sites/all/themes/$sitename/$sitename.info
-sed -i 's/base-theme-name/$sitename/g' sites/all/themes/$sitename/template.php
-sed -i 's/base-theme-name/$sitename/g' sites/all/themes/$sitename/theme-settings.php
+sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/$sitename.info
+sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/template.php
+sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/theme-settings.php
 
 
 
@@ -159,7 +159,7 @@ drush si standard --account-name=admin --account-pass='admin' --db-url=mysql://"
 drush en admin admin_menu adminimal_admin_menu features field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui base_page_setup bps_ct_base bps_views_article bps_pathauto -y
 drush dis toolbar -y
 
-#Setup theme 
+#Setup theme
 drush pm-enable $sitename -y
 drush vset theme_default $sitename
 drush vset admin_theme adminimal
