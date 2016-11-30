@@ -170,23 +170,24 @@ drush vset admin_theme adminimal
 #--------------------------------
 # get some librays
 #--------------------------------
-# plupload
 cd sites/all/libraries
+
+# plupload
 wget  https://github.com/moxiecode/plupload/archive/v1.5.8.zip
 unzip v1.5.8.zip
 rm -R v1.5.8.zip
 mv plupload-1.5.8 plupload
 
 # plupload
-cd sites/all/libraries
 wget  https://github.com/jackmoore/colorbox/archive/1.x.zip
 unzip 1.x.zip
 rm -R 1.x.zip
 mv colorbox-1.x colorbox
 
+cd ../../../
 
 #--------------------------------
-# get some librays
+# SASS setup
 #--------------------------------
 
 cd sites/all/themes/$sitename/
