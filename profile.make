@@ -37,17 +37,13 @@ projects:
     subdir: "contrib"
   ckeditor:
     subdir: "contrib"
-
   field_group:
     subdir: "contrib"
-
   filefield_sources:
     subdir: "contrib"
   filefield_sources_plupload:
     subdir: "contrib"
   paragraphs:
     subdir: "contrib"
-
-
   adminimal_theme:
     subdir: ""

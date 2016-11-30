@@ -124,6 +124,22 @@ fi
 
 cd $vp$vh
 
+#get custom module
+git clone https://github.com/redix07/drupalModule.git sites/all/modules/
+rm -R sites/all/modules/.git
+
+#get base theme
+git clone https://github.com/redix07/drupalTheme.git sites/all/themes/
+rm -R sites/all/themes/.git
+mv sites/all/themes/base-theme sites/all/themes/$sitename
+mv sites/all/themes/$sitename/base-theme-name.info sites/all/themes/$sitename/$sitename.info
+sed -i 's/base-theme-name/$sitename/g' sites/all/themes/$sitename/$sitename.info
+sed -i 's/base-theme-name/$sitename/g' sites/all/themes/$sitename/template.php
+sed -i 's/base-theme-name/$sitename/g' sites/all/themes/$sitename/theme-settings.php
+
+
+
+#get drupal core and module
 echo 'Downloading Drupal and most useful modules...'
 #Download Drupal with modules which have defined in .make files
 drush -y  make https://raw.githubusercontent.com/redix07/drupalDevel/master/profile.make .
@@ -139,13 +155,30 @@ chmod g+w sites/default/settings.php
 #install drupal
 drush si standard --account-name=admin --account-pass='admin' --db-url=mysql://"$sitename":"admin"@localhost/"$sitename" -y
 
-
 #Some site customization after installation
-drush en admin admin_menu adminimal_admin_menu features field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui -y
+drush en admin admin_menu adminimal_admin_menu features field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui base_page_setup bps_ct_base bps_views_article bps_pathauto -y
 drush dis toolbar -y
 
+#Setup theme 
+drush pm-enable $sitename -y
+drush vset theme_default $sitename
+drush vset admin_theme adminimal
+
+#--------------------------------
+# get some librays
+#--------------------------------
+# plupload
+cd sites/all/libraries
+wget  https://github.com/moxiecode/plupload/archive/v1.5.8.zip
+unzip v1.5.8.zip
+rm -R v1.5.8.zip
+mv plupload-1.5.8 plupload
 
 #change owner
 chown -R $vhowner:www-data $vp$vh
+
+echo -e "$(tput setaf 2)New vhost $vh has been created!$(tput sgr 0) \n"
+echo -e "$(tput setaf 2)New database $sitename has been created!$(tput sgr 0)"
+echo -e "$(tput setaf 2)user name: $sitename and password: admin$(tput sgr 0)"
 
 echo -e "\n\n $(tput setaf 6)Success!$(tput sgr 0) \n "
