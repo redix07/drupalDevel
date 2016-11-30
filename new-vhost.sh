@@ -180,10 +180,9 @@ mv plupload-1.5.8 plupload
 # plupload
 cd sites/all/libraries
 wget  https://github.com/jackmoore/colorbox/archive/1.x.zip
-unzip colorbox-1.x.zip
-rm -R colorbox-1.x.zip
+unzip 1.x.zip
+rm -R 1.x.zip
 mv colorbox-1.x colorbox
-
 
 
 #change owner
