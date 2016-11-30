@@ -185,8 +185,26 @@ rm -R 1.x.zip
 mv colorbox-1.x colorbox
 
 
+#--------------------------------
+# get some librays
+#--------------------------------
+
+cd sites/all/themes/$sitename/
+npm install
+bower install
+cd ../../../../
+
+#--------------------------------
+# final setup
+#--------------------------------
+
 #change owner
 chown -R $vhowner:www-data $vp$vh
+
+
+
+
+
 
 echo -e "$(tput setaf 2)New vhost $vh has been created!$(tput sgr 0) \n"
 echo -e "$(tput setaf 2)New database $sitename has been created!$(tput sgr 0)"
