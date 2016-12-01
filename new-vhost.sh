@@ -128,6 +128,10 @@ cd $vp$vh
 git clone https://github.com/redix07/drupalModule.git sites/all/modules/
 rm -R sites/all/modules/.git
 
+#get inir data
+git clone https://github.com/redix07/drupalDataini.git sites/default/
+rm -R sites/default//.git
+
 #get base theme
 git clone https://github.com/redix07/drupalTheme.git sites/all/themes/
 rm -R sites/all/themes/.git
@@ -161,7 +165,7 @@ chmod g+w sites/default/settings.php
 drush si standard --account-name=admin --account-pass='admin' --db-url=mysql://"$sitename":"admin"@localhost/"$sitename" -y
 
 #Some site customization after installation
-drush en admin admin_menu adminimal_admin_menu features field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto -y
+drush en admin admin_menu adminimal_admin_menu features devel backup_migrate field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto -y
 drush dis toolbar -y
 
 #Setup theme

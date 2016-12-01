@@ -13,6 +13,10 @@ projects:
     subdir: "contrib"
   colorbox:
     subdir: "contrib"
+  devel:
+    subdir: "contrib"
+  backup_migrate:
+    subdir: "contrib"
   easy_breadcrumb:
     subdir: "contrib"
   features:
