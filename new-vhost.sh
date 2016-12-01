@@ -173,6 +173,9 @@ drush pm-enable $sitename -y
 drush vset theme_default $sitename
 drush vset admin_theme adminimal
 
+#restore data
+drush bam-restore db manual "Site-Install-2016-12-01T14-22-09.mysql.gz" -y
+
 #--------------------------------
 # get some librays
 #--------------------------------
@@ -207,10 +210,6 @@ cd ../../../../
 
 #change owner
 chown -R $vhowner:www-data $vp$vh
-
-
-
-
 
 
 echo -e "$(tput setaf 2)New vhost $vh has been created!$(tput sgr 0) \n"
