@@ -180,7 +180,7 @@ drush si standard --account-name=admin --account-pass='admin' --db-url=mysql://"
 #--------------------------------
 
 #Some site customization after installation
-drush en admin admin_menu adminimal_admin_menu features devel backup_migrate node_export uuid field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto bps_conf_lang -y
+drush en admin admin_menu adminimal_admin_menu features devel backup_migrate node_export uuid field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto bps_conf_lang bps_menu_top -y
 drush dis toolbar -y
 
 #---------------------------------------
@@ -206,7 +206,7 @@ drush vset theme_default $sitename
 drush vset admin_theme adminimal
 
 #restore data
-drush bam-restore files manual "file-data.mysql.gz" -y
+drush bam-restore files manual "file-data.tar.gz" -y
 
 #--------------------------------
 # add librays
