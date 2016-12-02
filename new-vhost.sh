@@ -195,7 +195,7 @@ drush vset comment_webform 0 -y
 #Setup pathauto pattern
 drush vset  pathauto_node_article_pattern 'news/[node:title].html'
 drush vset  pathauto_node_page_pattern '[node:title].html'
-drush vset  pathauto_node_page_webform '[node:title].html'
+drush vset  pathauto_node_webform_pattern '[node:title].html'
 
 #Setup privfiles
 drush vset --yes file_private_path sites/default/privfiles
@@ -207,6 +207,8 @@ drush vset admin_theme adminimal
 
 #restore data
 drush bam-restore files manual "file-data.tar.gz" -y
+chmod -R  g+w sites/default/privfiles/
+chown -R $vhowner:www-data sites/default/privfiles/
 
 #--------------------------------
 # add librays
