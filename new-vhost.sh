@@ -140,6 +140,7 @@ mv sites/all/themes/base-theme-name sites/all/themes/$sitename
 mv sites/all/themes/$sitename/base-theme-name.info sites/all/themes/$sitename/$sitename.info
 mv sites/all/themes/$sitename/base-theme-name.info sites/all/themes/$sitename/$sitename.info
 mv sites/all/themes/$sitename/scss/base-theme-name.scss sites/all/themes/$sitename/scss/$sitename.scss
+mv sites/all/themes/$sitename/css/base-theme-name.scss sites/all/themes/$sitename/css/$sitename.scss
 
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/$sitename.info
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/template.php
@@ -180,7 +181,7 @@ drush si standard --account-name=admin --account-pass='admin' --db-url=mysql://"
 #--------------------------------
 
 #Some site customization after installation
-drush en admin admin_menu adminimal_admin_menu features devel backup_migrate node_export uuid field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto bps_conf_lang bps_menu_top -y
+drush en admin admin_menu adminimal_admin_menu features devel backup_migrate node_export uuid field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto bps_conf_lang  -y
 drush dis toolbar -y
 
 #---------------------------------------
@@ -206,9 +207,14 @@ drush vset theme_default $sitename
 drush vset admin_theme adminimal
 
 #restore data
+chmod -R  g+w sites/default/privfiles/
+chown -R $vhowner:www-data sites/default/privfiles/
 drush bam-restore files manual "file-data.tar.gz" -y
 chmod -R  g+w sites/default/privfiles/
 chown -R $vhowner:www-data sites/default/privfiles/
+drush ne-import --file=sites/default/privfiles/node-export-file.export
+
+drush en bps_menu_top  -y
 
 #--------------------------------
 # add librays
@@ -236,6 +242,7 @@ cd ../../../
 cd sites/all/themes/$sitename/
 npm install
 bower install
+gulp
 cd ../../../../
 
 #--------------------------------
@@ -244,7 +251,6 @@ cd ../../../../
 
 #change owner
 chown -R $vhowner:www-data $vp$vh
-
 
 echo -e "$(tput setaf 2)New vhost $vh has been created!$(tput sgr 0) \n"
 echo -e "$(tput setaf 2)New database $sitename has been created!$(tput sgr 0)"
