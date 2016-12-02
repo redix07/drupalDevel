@@ -29,6 +29,8 @@ projects:
     subdir: "contrib"
   module_filter:
     subdir: "contrib"
+  node_export:
+    subdir: "contrib"
   pathauto:
     subdir: "contrib"
   smtp:
@@ -40,6 +42,8 @@ projects:
   views:
     subdir: "contrib"
   webform:
+    subdir: "contrib"
+  uuid:
     subdir: "contrib"
   ckeditor:
     subdir: "contrib"

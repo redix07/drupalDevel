@@ -148,6 +148,10 @@ sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/theme-settings
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/templates/page.tpl.php
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/templates/node/node--news.tpl.php
 
+#--------------------------------
+#drupal pre Install
+#--------------------------------
+
 #get drupal core and module
 echo 'Downloading Drupal and most useful modules...'
 #Download Drupal with modules which have defined in .make files
@@ -157,16 +161,44 @@ drush -y  make https://raw.githubusercontent.com/redix07/drupalDevel/master/prof
 mkdir sites/default/files
 chmod -R  g+w sites/default/files/
 
+#privfiles
+chmod -R  g+w sites/default/privfiles/
+
 #prepare settings
 cp sites/default/default.settings.php sites/default/settings.php
 chmod g+w sites/default/settings.php
 
+#--------------------------------
+#drupal Install
+#--------------------------------
+
 #install drupal
 drush si standard --account-name=admin --account-pass='admin' --db-url=mysql://"$sitename":"admin"@localhost/"$sitename" -y
 
+#--------------------------------
+#drupal Install - add module
+#--------------------------------
+
 #Some site customization after installation
-drush en admin admin_menu adminimal_admin_menu features devel backup_migrate field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto -y
+drush en admin admin_menu adminimal_admin_menu features devel backup_migrate node_export uuid field_group filefield_sources filefield_sources_plupload paragraphs jquery_update metatag metatag_hreflang metatag_views module_filter pathauto transliteration webform views views_ui colorbox base_page_setup bps_ct_base bps_views_article bps_pathauto bps_conf_lang -y
 drush dis toolbar -y
+
+#---------------------------------------
+#drupal Configuration and finale  config
+#---------------------------------------
+
+#Setup disable comments
+drush vset comment_article 0 -y
+drush vset comment_page 0 -y
+drush vset comment_webform 0 -y
+
+#Setup pathauto pattern
+drush vset  pathauto_node_article_pattern 'news/[node:title].html'
+drush vset  pathauto_node_page_pattern '[node:title].html'
+drush vset  pathauto_node_page_webform '[node:title].html'
+
+#Setup privfiles
+drush vset --yes file_private_path sites/default/privfiles
 
 #Setup theme
 drush pm-enable $sitename -y
@@ -174,10 +206,10 @@ drush vset theme_default $sitename
 drush vset admin_theme adminimal
 
 #restore data
-drush bam-restore db manual "Site-Install-2016-12-01T14-22-09.mysql.gz" -y
+drush bam-restore files manual "file-data.mysql.gz" -y
 
 #--------------------------------
-# get some librays
+# add librays
 #--------------------------------
 cd sites/all/libraries
 
