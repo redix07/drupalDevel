@@ -140,7 +140,7 @@ mv sites/all/themes/base-theme-name sites/all/themes/$sitename
 mv sites/all/themes/$sitename/base-theme-name.info sites/all/themes/$sitename/$sitename.info
 mv sites/all/themes/$sitename/base-theme-name.info sites/all/themes/$sitename/$sitename.info
 mv sites/all/themes/$sitename/scss/base-theme-name.scss sites/all/themes/$sitename/scss/$sitename.scss
-mv sites/all/themes/$sitename/css/base-theme-name.scss sites/all/themes/$sitename/css/$sitename.scss
+mv sites/all/themes/$sitename/css/base-theme-name.css sites/all/themes/$sitename/css/$sitename.css
 
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/$sitename.info
 sed -i "s/base_theme_name/$sitename/g" sites/all/themes/$sitename/template.php
